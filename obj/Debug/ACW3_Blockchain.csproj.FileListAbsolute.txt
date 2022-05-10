@@ -1,0 +1,13 @@
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\bin\Debug\ACW3_Blockchain.exe.config
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\bin\Debug\ACW3_Blockchain.exe
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\bin\Debug\ACW3_Blockchain.pdb
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.csproj.AssemblyReference.cache
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.csproj.SuggestedBindingRedirects.cache
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.ACW3_Blockchain.resources
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.Properties.Resources.resources
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.csproj.GenerateResource.cache
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.csproj.CoreCompileInputs.cache
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.exe
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.pdb
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.SendMoney.resources
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.LoginForm.resources
