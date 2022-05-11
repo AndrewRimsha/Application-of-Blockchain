@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -21,17 +16,20 @@ namespace ACW3_Blockchain
         public static int ZeroCount = 4;
         //string filenamePrivateKeyXml;    //remove!
         string privateKeyLoad;
+        string nameString;
+        decimal balance;
         List<string> addressessList = new List<string>();
         public ACW3_Blockchain(string privateKeyString)
         {
             InitializeComponent();
-            loginAddressFrom = getPublicKeyString(privateKeyString, "Modulus");
-            //labelPublicID.Text = string.Format("id:{0}", loginAddressFrom);
-            labelPublicID.Text = loginAddressFrom;
-            exponentFrom = getPublicKeyString(privateKeyString, "Exponent");
-            //filenamePrivateKeyXml = @"D:\privatekey2048.xml";
-            //privateKeyLoad = File.ReadAllText(privateKeyString);
+            balance = 0;
             privateKeyLoad = privateKeyString;
+            nameString = getPublicKeyString(privateKeyString, "Name");
+            loginAddressFrom = getPublicKeyString(privateKeyString, "Modulus");
+            exponentFrom = getPublicKeyString(privateKeyString, "Exponent");
+            labelPublicID.Text = loginAddressFrom;
+            labelName.Text = string.Format("Name: {0}", nameString);
+            labelBalance.Text = string.Format("Balance: {0}", balance);
             changeDataGridView(ref dataGridViewBlockchain);
             dataGridViewBlockchain.Columns.Add("id", "id");
             dataGridViewBlockchain.Columns["id"].Width = 25;
@@ -64,32 +62,156 @@ namespace ACW3_Blockchain
             buttonValidateBlockchain.Click += ButtonValidateBlockchain_Click;
 
 
-            string dataToEncryptString = "The quick brown fox jumps over the lazy dog";
-            byte[] bytesDataToEncryptString = Encoding.ASCII.GetBytes(dataToEncryptString);
+            
+            dataGridViewBlockchain.MouseClick += DataGridViewBlockchain_MouseClick;
+        }
 
-            RSACryptoServiceProvider rSA = new RSACryptoServiceProvider();
-            var privateKey = rSA.ToXmlString(true);
-            var publicKey = rSA.ToXmlString(false);
-
-            //byte[] signature = rSA.SignHash(bytesDataToEncryptString, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
-
-            string filenamePrivateKeyXml = @"D:\privatekey2048_3.xml";
-            //string filenamePublicKeyXml = @"D:\publickey2048_3.xml";
-            using (StreamWriter writer = new StreamWriter(filenamePrivateKeyXml))
+        private void DataGridViewBlockchain_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
             {
-                writer.WriteLine(privateKey);
+                //dataGridViewBlockchain.ContextMenuStrip = contextMenuStripBlockchainDGV;
+                int currentMouseOverColumn = dataGridViewBlockchain.HitTest(e.X, e.Y).ColumnIndex;
+                int currentMouseOverRow = dataGridViewBlockchain.HitTest(e.X, e.Y).RowIndex;
+                if (currentMouseOverColumn != -1 && currentMouseOverRow != -1)
+                {
+                    ToolStripMenuItem toolStripMenuItemFixHash = createToolStripMenuItemEvent("toolStripMenuItemFixHash", "Fix Hash", null, ToolStripMenuItemFixHash_Click);
+                    ToolStripMenuItem toolStripMenuItemFixSign = createToolStripMenuItemEvent("toolStripMenuItemFixSign", "Fix Sign", null, ToolStripMenuItemFixSign_Click);
+                    ToolStripMenuItem toolStripMenuItemFixNonce = createToolStripMenuItemEvent("toolStripMenuItemFixNonce", "Fix Nonce", null, ToolStripMenuItemFixNonce_Click);
+
+                    ToolStripItem[] toolStripItems = null;
+                    if (currentMouseOverColumn == dataGridViewBlockchain.Columns["PreviousHash"].Index)
+                        toolStripItems = new ToolStripItem[] { toolStripMenuItemFixHash };
+                    if (currentMouseOverColumn == dataGridViewBlockchain.Columns["Sign"].Index)
+                        toolStripItems = new ToolStripItem[] { toolStripMenuItemFixSign };
+                    if (currentMouseOverColumn == dataGridViewBlockchain.Columns["Nonce"].Index)
+                        toolStripItems = new ToolStripItem[] { toolStripMenuItemFixNonce };
+                    if (toolStripItems != null)
+                    {
+                        ContextMenuStrip contextMenuStripBlockchainDGV = createContextMenuStrip("contextMenuStripBlockchainDGV", toolStripItems);
+                        contextMenuStripBlockchainDGV.Show(dataGridViewBlockchain, new Point(e.X, e.Y));
+                    }
+                    dataGridViewBlockchain[currentMouseOverColumn, currentMouseOverRow].Selected = true;
+                }
             }
-            //using (StreamWriter writer = new StreamWriter(filenamePublicKeyXml))
+        }
+
+        private void ToolStripMenuItemFixHash_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewBlockchain.SelectedCells.Count > 0)
             {
-            //    writer.WriteLine(publicKey);
+                if (dataGridViewBlockchain.SelectedCells[0].ColumnIndex == dataGridViewBlockchain.Columns["PreviousHash"].Index)
+                {
+
+                }
+                else
+                    MessageBox.Show("Hash cells not selected");
             }
+            else
+                MessageBox.Show("Cells not selected");
+        }
 
-            var EncodedString = Convert.ToBase64String(Encoding.UTF8.GetBytes(privateKey));
+        private void ToolStripMenuItemFixSign_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewBlockchain.SelectedCells.Count > 0)
+            {
+                if (dataGridViewBlockchain.SelectedCells[0].ColumnIndex == dataGridViewBlockchain.Columns["Sign"].Index)
+                {
 
+                }
+                else
+                    MessageBox.Show("Sign cells not selected");
+            }
+            else
+                MessageBox.Show("Cells not selected");
+        }
 
+        private void ToolStripMenuItemFixNonce_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewBlockchain.SelectedCells.Count > 0)
+            {
+                if (dataGridViewBlockchain.SelectedCells[0].ColumnIndex == dataGridViewBlockchain.Columns["Nonce"].Index)
+                {
 
-            Debug.WriteLine(privateKey);
-            Debug.WriteLine(EncodedString);
+                }
+                else
+                    MessageBox.Show("Nonce cells not selected");
+            }
+            else
+                MessageBox.Show("Cells not selected");
+        }
+
+        private void generateKeyPairRSA(string pathToSaveKeys)
+        {
+            RSA rsa = new RSACryptoServiceProvider(1024); // Generate a new 1024-bit RSA key
+            string privateKeyXML = rsa.ToXmlString(true);
+            //string publicOnlyKeyXML = rsa.ToXmlString(false);
+            //File.WriteAllText(pathToSaveKeys, privateKeyXML);
+            using (StreamWriter writer = new StreamWriter(pathToSaveKeys))
+            {
+                writer.WriteLine(privateKeyXML);
+            }
+        }
+
+        private void saveDGV()
+        {
+            string fileName = @"D:\123.blockchain";
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(fileName))
+                {
+                    for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
+                    {
+                        if (i > 0)
+                        {
+                            dataGridViewBlockchain["PreviousHash", i].Value = getHashDataFromRowDGV(i - 1, dataGridViewBlockchain);
+
+                        }
+                        string sign = SignData(privateKeyLoad, dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
+                            dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Amount", i].Value.ToString(),
+                            dataGridViewBlockchain["Date", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString(),
+                            dataGridViewBlockchain["PreviousHash", i].Value.ToString());
+                        long nonce = FindNonce(ZeroCount, dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
+                            dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Amount", i].Value.ToString(),
+                            dataGridViewBlockchain["Date", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString(),
+                            dataGridViewBlockchain["PreviousHash", i].Value.ToString(), dataGridViewBlockchain["Sign", i].Value.ToString());
+                        dataGridViewBlockchain["Nonce", i].Value = nonce;
+
+                        StringBuilder sbToFile = new StringBuilder();
+                        writer.WriteLine("{");
+                        sbToFile.AppendFormat("\t{0}:{1}\n", "id", dataGridViewBlockchain["id", i].Value.ToString());
+                        sbToFile.AppendFormat("\t{0}:{1}\n", "From", dataGridViewBlockchain["From", i].Value.ToString());
+                        sbToFile.AppendFormat("\t{0}:{1}\n", "To", dataGridViewBlockchain["To", i].Value.ToString());
+                        sbToFile.AppendFormat("\t{0}:{1}\n", "Amount", dataGridViewBlockchain["Amount", i].Value.ToString());
+                        //sbToFile.AppendFormat("\t{0}:{1}\n", "Date", dataGridViewBlockchain["Date", i].Value.ToString());
+                        sbToFile.AppendFormat("\t{0}:{1}\n", "Date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        sbToFile.AppendFormat("\t{0}:{1}\n", "Exponent", dataGridViewBlockchain["Exponent", i].Value.ToString());
+                        //sbToFile.AppendFormat("\t{0}:{1}\n", "PreviousHash", getHashString(sbToFile.ToString()));
+                        sbToFile.AppendFormat("\t{0}:{1}\n", "PreviousHash", dataGridViewBlockchain["PreviousHash", i].Value.ToString());
+                        //sbToFile.AppendFormat("\t{0}:{1}\n", "Nonce", nonce);
+                        sbToFile.AppendFormat("\t{0}:{1}", "Nonce", dataGridViewBlockchain["Nonce", i].Value.ToString());
+                        writer.WriteLine(sbToFile.ToString());
+                        writer.WriteLine("}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void countBalance()
+        {
+            balance = 0;
+            for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
+            {
+                if (dataGridViewBlockchain["To", i].Value.ToString() == loginAddressFrom)
+                    balance += Convert.ToDecimal(dataGridViewBlockchain["Amount", i].Value.ToString());
+                if (dataGridViewBlockchain["From", i].Value.ToString() == loginAddressFrom)
+                    balance -= Convert.ToDecimal(dataGridViewBlockchain["Amount", i].Value.ToString());
+            }
+            labelBalance.Text = string.Format("Balance: {0}", balance);
         }
 
         static void changeDataGridView(ref DataGridView dgv)
@@ -107,6 +229,25 @@ namespace ACW3_Blockchain
             //dgv.AutoGenerateColumns = true;
             dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dgv.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        static ToolStripMenuItem createToolStripMenuItemEvent(string nameToolStripMenuItem, string textToolStripMenuItem, ToolStripItem[] toolStripItems, EventHandler eventHandler)
+        {
+            ToolStripMenuItem TSMI = new ToolStripMenuItem();
+            TSMI.Name = nameToolStripMenuItem;
+            TSMI.Text = textToolStripMenuItem;
+            if (toolStripItems != null)
+                TSMI.DropDownItems.AddRange(toolStripItems);
+            TSMI.Click += eventHandler;
+            return TSMI;
+        }
+
+        static public ContextMenuStrip createContextMenuStrip(string nameContextMenuStrip, ToolStripItem[] toolStripItems)
+        {
+            ContextMenuStrip CMS = new ContextMenuStrip();
+            CMS.Name = nameContextMenuStrip;
+            CMS.Items.AddRange(toolStripItems);
+            return CMS;
         }
 
         private void ButtonFindPath_Click(object sender, EventArgs e)
@@ -139,11 +280,12 @@ namespace ACW3_Blockchain
                 foreach (Dictionary<string,string> block in blockList)
                 {
                     dataGridViewBlockchain.Rows.Add(block["id"], block["From"], block["To"], block["Amount"], block["Date"], block["Exponent"],block["PreviousHash"], block["Sign"], block["Nonce"]);
-                    if (!addressessList.Contains(block["From"]))
+                    if (!addressessList.Contains(block["From"]) && block["From"]!= loginAddressFrom && block["From"] != "0")
                         addressessList.Add(block["From"]);
-                    if (!addressessList.Contains(block["To"]))
+                    if (!addressessList.Contains(block["To"]) && block["To"] != loginAddressFrom && block["To"] != "0")
                         addressessList.Add(block["To"]);
                 }
+                countBalance();
             }
             catch (Exception ex)
             {
@@ -153,87 +295,36 @@ namespace ACW3_Blockchain
 
         private void ButtonLogout_Click(object sender, EventArgs e)
         {
-            string fileName = @"D:\123.blockchain";
-            try
+            DialogResult dialog = MessageBox.Show("Are you sure you want to log out?", "Log out?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialog == DialogResult.Yes)
             {
-                using (StreamWriter writer = new StreamWriter(fileName))
-                {
-                    for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
-                    {
-                        
-                        //string currentBlockData = string.Empty;
-
-                            
-                        if (i > 0)
-                        {
-                            dataGridViewBlockchain["PreviousHash", i].Value = getHashDataFromRowDGV(i-1, dataGridViewBlockchain);
-
-                        }
-                        //currentBlockData += string.Format("{0};", dataGridViewBlockchain["id", i].Value.ToString());
-                        //currentBlockData += string.Format("{0};", dataGridViewBlockchain["From", i].Value.ToString());
-                        //currentBlockData += string.Format("{0};", dataGridViewBlockchain["To", i].Value.ToString());
-                        //currentBlockData += string.Format("{0};", dataGridViewBlockchain["Amount", i].Value.ToString());
-                        //currentBlockData += string.Format("{0};", dataGridViewBlockchain["Date", i].Value.ToString());
-                        ////currentBlockData += string.Format("{0};", DateTime.Now.ToString("M/d/yyyyMMdd HH:mm:ss"));                     //change!!!!!!!!!!!!!
-                        //currentBlockData += string.Format("{0};", dataGridViewBlockchain["Exponent", i].Value.ToString());
-                        //currentBlockData += string.Format("{0};", dataGridViewBlockchain["PreviousHash", i].Value.ToString());
-                        //long nonce = FindNonce(currentBlockData, 4);
-                        string sign = SignData(privateKeyLoad, dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
-                            dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Amount", i].Value.ToString(),
-                            dataGridViewBlockchain["Date", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString(),
-                            dataGridViewBlockchain["PreviousHash", i].Value.ToString());
-                        long nonce = FindNonce(ZeroCount, dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
-                            dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Amount", i].Value.ToString(),
-                            dataGridViewBlockchain["Date", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString(),
-                            dataGridViewBlockchain["PreviousHash", i].Value.ToString(), dataGridViewBlockchain["Sign", i].Value.ToString());
-                        dataGridViewBlockchain["Nonce", i].Value = nonce;
-                        //writer.WriteLine("{");
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "id", dataGridViewBlockchain["id", i].Value.ToString()));
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "From", dataGridViewBlockchain["From", i].Value.ToString()));
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "To", dataGridViewBlockchain["To", i].Value.ToString()));
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "Amount", dataGridViewBlockchain["Amount", i].Value.ToString()));
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "Date", dataGridViewBlockchain["Date", i].Value.ToString()));
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "Exponent", dataGridViewBlockchain["Exponent", i].Value.ToString()));
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "PreviousHash", dataGridViewBlockchain["PreviousHash", i].Value.ToString()));
-                        //writer.WriteLine(string.Format("\t{0}:{1}", "Nonce", dataGridViewBlockchain["Nonce", i].Value.ToString()));
-                        //writer.WriteLine("}");
-
-                        StringBuilder sbToFile = new StringBuilder();
-                        writer.WriteLine("{");
-                        sbToFile.AppendFormat("\t{0}:{1}\n", "id", dataGridViewBlockchain["id", i].Value.ToString());
-                        sbToFile.AppendFormat("\t{0}:{1}\n", "From", dataGridViewBlockchain["From", i].Value.ToString());
-                        sbToFile.AppendFormat("\t{0}:{1}\n", "To", dataGridViewBlockchain["To", i].Value.ToString());
-                        sbToFile.AppendFormat("\t{0}:{1}\n", "Amount", dataGridViewBlockchain["Amount", i].Value.ToString());
-                        //sbToFile.AppendFormat("\t{0}:{1}\n", "Date", dataGridViewBlockchain["Date", i].Value.ToString());
-                        sbToFile.AppendFormat("\t{0}:{1}\n", "Date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                        sbToFile.AppendFormat("\t{0}:{1}\n", "Exponent", dataGridViewBlockchain["Exponent", i].Value.ToString());
-                        //sbToFile.AppendFormat("\t{0}:{1}\n", "PreviousHash", getHashString(sbToFile.ToString()));
-                        sbToFile.AppendFormat("\t{0}:{1}\n", "PreviousHash", dataGridViewBlockchain["PreviousHash", i].Value.ToString());
-                        //sbToFile.AppendFormat("\t{0}:{1}\n", "Nonce", nonce);
-                        sbToFile.AppendFormat("\t{0}:{1}", "Nonce", dataGridViewBlockchain["Nonce", i].Value.ToString());
-                        writer.WriteLine(sbToFile.ToString());
-                        writer.WriteLine("}");
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                var blockchainForm = ActiveForm;
+                blockchainForm.Hide();
+                LoginForm loginForm = new LoginForm();
+                loginForm.Closed += (s, args) => blockchainForm.Close();
+                loginForm.Show();
             }
         }
 
         private void ButtonSync_Click(object sender, EventArgs e)
         {
             this.Text = string.Format("x={0},y={1}",this.Width,this.Height);
+            generateKeyPairRSA(@"D:\123.xml");
         }
 
         private void ButtonSendMoney_Click(object sender, EventArgs e)
         {
             if (dataGridViewBlockchain.RowCount > 0)
             {
-                string lastBlockHash = getHashDataFromRowDGV(dataGridViewBlockchain.RowCount - 1, dataGridViewBlockchain);
-                SendMoney sendMoney = new SendMoney(privateKeyLoad, loginAddressFrom, exponentFrom, lastBlockHash, addressessList, dataGridViewBlockchain);
-                sendMoney.ShowDialog();
+                if (balance > 0)
+                {
+                    string lastBlockHash = getHashDataFromRowDGV(dataGridViewBlockchain.RowCount - 1, dataGridViewBlockchain);
+                    SendMoney sendMoney = new SendMoney(balance, privateKeyLoad, loginAddressFrom, exponentFrom, lastBlockHash, addressessList, dataGridViewBlockchain);
+                    sendMoney.ShowDialog();
+                    countBalance();
+                }
+                else
+                    MessageBox.Show("Balance should be more than 0");
             }
             else
                 MessageBox.Show("Blockchain is empty");
@@ -258,14 +349,35 @@ namespace ACW3_Blockchain
         {
             for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
             {
-                string sign = SignData(privateKeyLoad, dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
+                if (i > 0)
+                {
+                    //string sign = SignData(privateKeyLoad, dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
+                    //dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Amount", i].Value.ToString(),
+                    //dataGridViewBlockchain["Date", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString(),
+                    //dataGridViewBlockchain["PreviousHash", i].Value.ToString());
+                    bool verefied = verifyData(dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
                     dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Amount", i].Value.ToString(),
                     dataGridViewBlockchain["Date", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString(),
-                    dataGridViewBlockchain["PreviousHash", i].Value.ToString());
-                if (dataGridViewBlockchain["Sign", i].Value.ToString() != sign)
-                    dataGridViewBlockchain["Sign", i].Style.BackColor = Color.Red;
+                    dataGridViewBlockchain["PreviousHash", i].Value.ToString(), dataGridViewBlockchain["Sign", i].Value.ToString(),
+                    dataGridViewBlockchain["From", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString());
+                    //if (dataGridViewBlockchain["Sign", i].Value.ToString() != sign)
+                    if(verefied)
+                        dataGridViewBlockchain["Sign", i].Style.BackColor = Color.Red;
+                    else
+                        dataGridViewBlockchain["Sign", i].Style.BackColor = Color.White;
+                }
                 else
-                    dataGridViewBlockchain["Sign", i].Style.BackColor = Color.White;
+                {
+                    bool verefied = verifyData(dataGridViewBlockchain["id", i].Value.ToString(), dataGridViewBlockchain["From", i].Value.ToString(),
+                    dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Amount", i].Value.ToString(),
+                    dataGridViewBlockchain["Date", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString(),
+                    dataGridViewBlockchain["PreviousHash", i].Value.ToString(), dataGridViewBlockchain["Sign", i].Value.ToString(),
+                    dataGridViewBlockchain["To", i].Value.ToString(), dataGridViewBlockchain["Exponent", i].Value.ToString());
+                    if (verefied)
+                        dataGridViewBlockchain["Sign", i].Style.BackColor = Color.Red;
+                    else
+                        dataGridViewBlockchain["Sign", i].Style.BackColor = Color.White;
+                }
             }
         }
 
@@ -474,8 +586,19 @@ namespace ACW3_Blockchain
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(privateKeyString);
-            XmlNode node = doc.DocumentElement.SelectSingleNode(selectNode);
-            return node.InnerText;
+            try
+            {
+                XmlNode node = doc.DocumentElement.SelectSingleNode(selectNode);
+                if (node != null)
+                    return node.InnerText;
+                else
+                    return string.Empty;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return string.Empty;
+            }
         }
 
         static byte[] getHash(string inputString)

@@ -171,6 +171,7 @@
             // 
             // numericUpDownAmount
             // 
+            this.numericUpDownAmount.DecimalPlaces = 6;
             this.numericUpDownAmount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownAmount.Location = new System.Drawing.Point(58, 3);
             this.numericUpDownAmount.Maximum = new decimal(new int[] {
