@@ -458,6 +458,7 @@
             this.textBoxCreator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxCreator.Location = new System.Drawing.Point(78, 3);
             this.textBoxCreator.Name = "textBoxCreator";
+            this.textBoxCreator.ReadOnly = true;
             this.textBoxCreator.Size = new System.Drawing.Size(331, 20);
             this.textBoxCreator.TabIndex = 1;
             // 
@@ -529,6 +530,11 @@
             this.numericUpDownFrom1.DecimalPlaces = 6;
             this.numericUpDownFrom1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownFrom1.Location = new System.Drawing.Point(335, 3);
+            this.numericUpDownFrom1.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
             this.numericUpDownFrom1.Name = "numericUpDownFrom1";
             this.numericUpDownFrom1.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownFrom1.TabIndex = 2;
@@ -583,6 +589,11 @@
             this.numericUpDownFrom2.DecimalPlaces = 6;
             this.numericUpDownFrom2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownFrom2.Location = new System.Drawing.Point(335, 3);
+            this.numericUpDownFrom2.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
             this.numericUpDownFrom2.Name = "numericUpDownFrom2";
             this.numericUpDownFrom2.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownFrom2.TabIndex = 2;
@@ -592,6 +603,11 @@
             this.numericUpDownFrom3.DecimalPlaces = 6;
             this.numericUpDownFrom3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownFrom3.Location = new System.Drawing.Point(335, 3);
+            this.numericUpDownFrom3.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
             this.numericUpDownFrom3.Name = "numericUpDownFrom3";
             this.numericUpDownFrom3.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownFrom3.TabIndex = 2;
@@ -601,6 +617,11 @@
             this.numericUpDownFrom4.DecimalPlaces = 6;
             this.numericUpDownFrom4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownFrom4.Location = new System.Drawing.Point(335, 3);
+            this.numericUpDownFrom4.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
             this.numericUpDownFrom4.Name = "numericUpDownFrom4";
             this.numericUpDownFrom4.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownFrom4.TabIndex = 2;
@@ -610,6 +631,11 @@
             this.numericUpDownFrom5.DecimalPlaces = 6;
             this.numericUpDownFrom5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownFrom5.Location = new System.Drawing.Point(335, 3);
+            this.numericUpDownFrom5.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
             this.numericUpDownFrom5.Name = "numericUpDownFrom5";
             this.numericUpDownFrom5.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownFrom5.TabIndex = 2;
@@ -619,6 +645,11 @@
             this.numericUpDownFrom6.DecimalPlaces = 6;
             this.numericUpDownFrom6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownFrom6.Location = new System.Drawing.Point(335, 3);
+            this.numericUpDownFrom6.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
             this.numericUpDownFrom6.Name = "numericUpDownFrom6";
             this.numericUpDownFrom6.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownFrom6.TabIndex = 2;

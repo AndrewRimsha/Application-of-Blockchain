@@ -16,8 +16,8 @@ namespace ACW3_Blockchain
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LoginForm());
-            Application.Run(new RequestForm());
+            Application.Run(new LoginForm());
+            //Application.Run(new RequestForm(new DataGridView()));
         }
     }
 }

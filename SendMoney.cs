@@ -41,7 +41,7 @@ namespace ACW3_Blockchain
                 int blockID = Convert.ToInt32(dataGridViewBlockchain["id", dataGridViewBlockchain.RowCount - 1].Value) + 1;
                 string dateOfTransaction = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 string sign = ACW3_Blockchain.SignData(privateKey, blockID.ToString(), textBoxLoginAddress.Text, comboBoxToAddress.Text, numericUpDownAmount.Value.ToString(), dateOfTransaction, exponent, lastBlock);
-                long nonce = ACW3_Blockchain.FindNonce(ACW3_Blockchain.ZeroCount, blockID.ToString(), textBoxLoginAddress.Text, comboBoxToAddress.Text, numericUpDownAmount.Value.ToString(), dateOfTransaction, exponent, lastBlock, sign);
+                long nonce = ACW3_Blockchain.FindNonce(blockID.ToString(), textBoxLoginAddress.Text, comboBoxToAddress.Text, numericUpDownAmount.Value.ToString(), dateOfTransaction, exponent, lastBlock, sign);
                 dataGridViewBlockchain.Rows.Add(blockID.ToString(), textBoxLoginAddress.Text, comboBoxToAddress.Text, numericUpDownAmount.Value.ToString(), dateOfTransaction, exponent, lastBlock, sign, nonce);
                 this.Close();
             }
