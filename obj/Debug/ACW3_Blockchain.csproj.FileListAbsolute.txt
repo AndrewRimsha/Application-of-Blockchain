@@ -11,3 +11,4 @@ D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.exe
 D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.pdb
 D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.SendMoney.resources
 D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.LoginForm.resources
+D:\YandexDisk\my programs\700100-ACW3_Blockchain\obj\Debug\ACW3_Blockchain.RequestForm.resources
