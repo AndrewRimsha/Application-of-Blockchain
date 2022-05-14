@@ -59,6 +59,12 @@ namespace ACW3_Blockchain
             this.dataGridViewRequests = new System.Windows.Forms.DataGridView();
             this.buttonCheckDate = new System.Windows.Forms.Button();
             this.checkBoxAutosave = new System.Windows.Forms.CheckBox();
+            this.groupBoxValidation = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonCheckBalance = new System.Windows.Forms.Button();
+            this.labelValidateStatus = new System.Windows.Forms.Label();
+            this.buttonRemoveUnvalidatedBlocks = new System.Windows.Forms.Button();
+            this.buttonRemoveUnvalidatedChain = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -68,6 +74,8 @@ namespace ACW3_Blockchain
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBlockchain)).BeginInit();
             this.groupBoxRequests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequests)).BeginInit();
+            this.groupBoxValidation.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -76,23 +84,26 @@ namespace ACW3_Blockchain
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxBlockchain, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.groupBoxRequests, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxRequests, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxValidation, 0, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(744, 411);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(744, 451);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -145,7 +156,7 @@ namespace ACW3_Blockchain
             this.buttonLogout.Margin = new System.Windows.Forms.Padding(1);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(78, 26);
-            this.buttonLogout.TabIndex = 0;
+            this.buttonLogout.TabIndex = 3;
             this.buttonLogout.Text = "Log out";
             this.buttonLogout.UseVisualStyleBackColor = true;
             // 
@@ -157,7 +168,7 @@ namespace ACW3_Blockchain
             this.labelID.Margin = new System.Windows.Forms.Padding(0);
             this.labelID.Name = "labelID";
             this.labelID.Size = new System.Drawing.Size(18, 28);
-            this.labelID.TabIndex = 3;
+            this.labelID.TabIndex = 0;
             this.labelID.Text = "id:";
             this.labelID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -191,7 +202,7 @@ namespace ACW3_Blockchain
             this.labelStatus.Location = new System.Drawing.Point(166, 0);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(158, 28);
-            this.labelStatus.TabIndex = 0;
+            this.labelStatus.TabIndex = 1;
             this.labelStatus.Text = "Status";
             this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -202,7 +213,7 @@ namespace ACW3_Blockchain
             this.labelLastSyncDate.Location = new System.Drawing.Point(330, 0);
             this.labelLastSyncDate.Name = "labelLastSyncDate";
             this.labelLastSyncDate.Size = new System.Drawing.Size(158, 28);
-            this.labelLastSyncDate.TabIndex = 1;
+            this.labelLastSyncDate.TabIndex = 2;
             this.labelLastSyncDate.Text = "Last sync date";
             this.labelLastSyncDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -214,7 +225,7 @@ namespace ACW3_Blockchain
             this.buttonSave.Margin = new System.Windows.Forms.Padding(1);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(85, 26);
-            this.buttonSave.TabIndex = 3;
+            this.buttonSave.TabIndex = 4;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
@@ -225,7 +236,7 @@ namespace ACW3_Blockchain
             this.labelName.Location = new System.Drawing.Point(3, 0);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(157, 28);
-            this.labelName.TabIndex = 4;
+            this.labelName.TabIndex = 0;
             this.labelName.Text = "Name";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -237,22 +248,22 @@ namespace ACW3_Blockchain
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            this.tableLayoutPanel4.Controls.Add(this.buttonSendMoney, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.buttonCheckHash, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.buttonCheckSignature, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.buttonCheckNonce, 5, 0);
-            this.tableLayoutPanel4.Controls.Add(this.buttonValidateBlockchain, 6, 0);
-            this.tableLayoutPanel4.Controls.Add(this.buttonCreateRequest, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.buttonCheckDate, 2, 0);
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel4.Controls.Add(this.buttonCheckHash, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.buttonCheckSignature, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.buttonCheckNonce, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.buttonValidateBlockchain, 5, 0);
+            this.tableLayoutPanel4.Controls.Add(this.buttonCheckDate, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.buttonCheckBalance, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.labelValidateStatus, 6, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(1, 381);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(1);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(742, 29);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(736, 24);
             this.tableLayoutPanel4.TabIndex = 5;
             // 
             // buttonSendMoney
@@ -262,7 +273,7 @@ namespace ACW3_Blockchain
             this.buttonSendMoney.Location = new System.Drawing.Point(1, 1);
             this.buttonSendMoney.Margin = new System.Windows.Forms.Padding(1);
             this.buttonSendMoney.Name = "buttonSendMoney";
-            this.buttonSendMoney.Size = new System.Drawing.Size(101, 27);
+            this.buttonSendMoney.Size = new System.Drawing.Size(183, 22);
             this.buttonSendMoney.TabIndex = 0;
             this.buttonSendMoney.Text = "Send Money";
             this.buttonSendMoney.UseVisualStyleBackColor = true;
@@ -271,10 +282,10 @@ namespace ACW3_Blockchain
             // 
             this.buttonCheckHash.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCheckHash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCheckHash.Location = new System.Drawing.Point(310, 1);
+            this.buttonCheckHash.Location = new System.Drawing.Point(207, 1);
             this.buttonCheckHash.Margin = new System.Windows.Forms.Padding(1);
             this.buttonCheckHash.Name = "buttonCheckHash";
-            this.buttonCheckHash.Size = new System.Drawing.Size(101, 27);
+            this.buttonCheckHash.Size = new System.Drawing.Size(101, 22);
             this.buttonCheckHash.TabIndex = 2;
             this.buttonCheckHash.Text = "Check Hash";
             this.buttonCheckHash.UseVisualStyleBackColor = true;
@@ -283,10 +294,10 @@ namespace ACW3_Blockchain
             // 
             this.buttonCheckSignature.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCheckSignature.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCheckSignature.Location = new System.Drawing.Point(413, 1);
+            this.buttonCheckSignature.Location = new System.Drawing.Point(310, 1);
             this.buttonCheckSignature.Margin = new System.Windows.Forms.Padding(1);
             this.buttonCheckSignature.Name = "buttonCheckSignature";
-            this.buttonCheckSignature.Size = new System.Drawing.Size(101, 27);
+            this.buttonCheckSignature.Size = new System.Drawing.Size(101, 22);
             this.buttonCheckSignature.TabIndex = 3;
             this.buttonCheckSignature.Text = "Check Signature";
             this.buttonCheckSignature.UseVisualStyleBackColor = true;
@@ -295,10 +306,10 @@ namespace ACW3_Blockchain
             // 
             this.buttonCheckNonce.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCheckNonce.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCheckNonce.Location = new System.Drawing.Point(516, 1);
+            this.buttonCheckNonce.Location = new System.Drawing.Point(413, 1);
             this.buttonCheckNonce.Margin = new System.Windows.Forms.Padding(1);
             this.buttonCheckNonce.Name = "buttonCheckNonce";
-            this.buttonCheckNonce.Size = new System.Drawing.Size(101, 27);
+            this.buttonCheckNonce.Size = new System.Drawing.Size(101, 22);
             this.buttonCheckNonce.TabIndex = 4;
             this.buttonCheckNonce.Text = "Check Nonce";
             this.buttonCheckNonce.UseVisualStyleBackColor = true;
@@ -307,10 +318,10 @@ namespace ACW3_Blockchain
             // 
             this.buttonValidateBlockchain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonValidateBlockchain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonValidateBlockchain.Location = new System.Drawing.Point(619, 1);
+            this.buttonValidateBlockchain.Location = new System.Drawing.Point(516, 1);
             this.buttonValidateBlockchain.Margin = new System.Windows.Forms.Padding(1);
             this.buttonValidateBlockchain.Name = "buttonValidateBlockchain";
-            this.buttonValidateBlockchain.Size = new System.Drawing.Size(122, 27);
+            this.buttonValidateBlockchain.Size = new System.Drawing.Size(115, 22);
             this.buttonValidateBlockchain.TabIndex = 5;
             this.buttonValidateBlockchain.Text = "Validate Blockchain";
             this.buttonValidateBlockchain.UseVisualStyleBackColor = true;
@@ -319,10 +330,10 @@ namespace ACW3_Blockchain
             // 
             this.buttonCreateRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCreateRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCreateRequest.Location = new System.Drawing.Point(104, 1);
+            this.buttonCreateRequest.Location = new System.Drawing.Point(186, 1);
             this.buttonCreateRequest.Margin = new System.Windows.Forms.Padding(1);
             this.buttonCreateRequest.Name = "buttonCreateRequest";
-            this.buttonCreateRequest.Size = new System.Drawing.Size(101, 27);
+            this.buttonCreateRequest.Size = new System.Drawing.Size(183, 22);
             this.buttonCreateRequest.TabIndex = 1;
             this.buttonCreateRequest.Text = "Create Request";
             this.buttonCreateRequest.UseVisualStyleBackColor = true;
@@ -400,7 +411,7 @@ namespace ACW3_Blockchain
             this.groupBoxBlockchain.Margin = new System.Windows.Forms.Padding(1);
             this.groupBoxBlockchain.Name = "groupBoxBlockchain";
             this.groupBoxBlockchain.Size = new System.Drawing.Size(742, 174);
-            this.groupBoxBlockchain.TabIndex = 6;
+            this.groupBoxBlockchain.TabIndex = 3;
             this.groupBoxBlockchain.TabStop = false;
             this.groupBoxBlockchain.Text = "Blockchain";
             // 
@@ -413,17 +424,17 @@ namespace ACW3_Blockchain
             this.dataGridViewBlockchain.Margin = new System.Windows.Forms.Padding(1);
             this.dataGridViewBlockchain.Name = "dataGridViewBlockchain";
             this.dataGridViewBlockchain.Size = new System.Drawing.Size(736, 155);
-            this.dataGridViewBlockchain.TabIndex = 3;
+            this.dataGridViewBlockchain.TabIndex = 0;
             // 
             // groupBoxRequests
             // 
             this.groupBoxRequests.Controls.Add(this.dataGridViewRequests);
             this.groupBoxRequests.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxRequests.Location = new System.Drawing.Point(1, 287);
+            this.groupBoxRequests.Location = new System.Drawing.Point(1, 332);
             this.groupBoxRequests.Margin = new System.Windows.Forms.Padding(1);
             this.groupBoxRequests.Name = "groupBoxRequests";
             this.groupBoxRequests.Size = new System.Drawing.Size(742, 92);
-            this.groupBoxRequests.TabIndex = 7;
+            this.groupBoxRequests.TabIndex = 5;
             this.groupBoxRequests.TabStop = false;
             this.groupBoxRequests.Text = "Requests";
             // 
@@ -436,17 +447,17 @@ namespace ACW3_Blockchain
             this.dataGridViewRequests.Margin = new System.Windows.Forms.Padding(1);
             this.dataGridViewRequests.Name = "dataGridViewRequests";
             this.dataGridViewRequests.Size = new System.Drawing.Size(736, 73);
-            this.dataGridViewRequests.TabIndex = 4;
+            this.dataGridViewRequests.TabIndex = 0;
             // 
             // buttonCheckDate
             // 
             this.buttonCheckDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCheckDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCheckDate.Location = new System.Drawing.Point(207, 1);
+            this.buttonCheckDate.Location = new System.Drawing.Point(104, 1);
             this.buttonCheckDate.Margin = new System.Windows.Forms.Padding(1);
             this.buttonCheckDate.Name = "buttonCheckDate";
-            this.buttonCheckDate.Size = new System.Drawing.Size(101, 27);
-            this.buttonCheckDate.TabIndex = 6;
+            this.buttonCheckDate.Size = new System.Drawing.Size(101, 22);
+            this.buttonCheckDate.TabIndex = 1;
             this.buttonCheckDate.Text = "Check Date";
             this.buttonCheckDate.UseVisualStyleBackColor = true;
             // 
@@ -458,17 +469,97 @@ namespace ACW3_Blockchain
             this.checkBoxAutosave.Location = new System.Drawing.Point(494, 3);
             this.checkBoxAutosave.Name = "checkBoxAutosave";
             this.checkBoxAutosave.Size = new System.Drawing.Size(158, 22);
-            this.checkBoxAutosave.TabIndex = 5;
+            this.checkBoxAutosave.TabIndex = 3;
             this.checkBoxAutosave.Text = "Autosave";
             this.checkBoxAutosave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxAutosave.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxValidation
+            // 
+            this.groupBoxValidation.Controls.Add(this.tableLayoutPanel4);
+            this.groupBoxValidation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxValidation.Location = new System.Drawing.Point(1, 287);
+            this.groupBoxValidation.Margin = new System.Windows.Forms.Padding(1);
+            this.groupBoxValidation.Name = "groupBoxValidation";
+            this.groupBoxValidation.Size = new System.Drawing.Size(742, 43);
+            this.groupBoxValidation.TabIndex = 4;
+            this.groupBoxValidation.TabStop = false;
+            this.groupBoxValidation.Text = "Validation";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 4;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.00062F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.00062F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.99813F));
+            this.tableLayoutPanel6.Controls.Add(this.buttonSendMoney, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonCreateRequest, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonRemoveUnvalidatedBlocks, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonRemoveUnvalidatedChain, 3, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(1, 426);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(1);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(742, 24);
+            this.tableLayoutPanel6.TabIndex = 6;
+            // 
+            // buttonCheckBalance
+            // 
+            this.buttonCheckBalance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCheckBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCheckBalance.Location = new System.Drawing.Point(1, 1);
+            this.buttonCheckBalance.Margin = new System.Windows.Forms.Padding(1);
+            this.buttonCheckBalance.Name = "buttonCheckBalance";
+            this.buttonCheckBalance.Size = new System.Drawing.Size(101, 22);
+            this.buttonCheckBalance.TabIndex = 0;
+            this.buttonCheckBalance.Text = "Check Balance";
+            this.buttonCheckBalance.UseVisualStyleBackColor = true;
+            // 
+            // labelValidateStatus
+            // 
+            this.labelValidateStatus.AutoSize = true;
+            this.labelValidateStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelValidateStatus.ForeColor = System.Drawing.Color.Red;
+            this.labelValidateStatus.Location = new System.Drawing.Point(635, 0);
+            this.labelValidateStatus.Name = "labelValidateStatus";
+            this.labelValidateStatus.Size = new System.Drawing.Size(98, 24);
+            this.labelValidateStatus.TabIndex = 6;
+            this.labelValidateStatus.Text = "Not validated";
+            this.labelValidateStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonRemoveUnvalidatedBlocks
+            // 
+            this.buttonRemoveUnvalidatedBlocks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonRemoveUnvalidatedBlocks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveUnvalidatedBlocks.Location = new System.Drawing.Point(371, 1);
+            this.buttonRemoveUnvalidatedBlocks.Margin = new System.Windows.Forms.Padding(1);
+            this.buttonRemoveUnvalidatedBlocks.Name = "buttonRemoveUnvalidatedBlocks";
+            this.buttonRemoveUnvalidatedBlocks.Size = new System.Drawing.Size(183, 22);
+            this.buttonRemoveUnvalidatedBlocks.TabIndex = 2;
+            this.buttonRemoveUnvalidatedBlocks.Text = "Remove Unvalidated Blocks";
+            this.buttonRemoveUnvalidatedBlocks.UseVisualStyleBackColor = true;
+            // 
+            // buttonRemoveUnvalidatedChain
+            // 
+            this.buttonRemoveUnvalidatedChain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonRemoveUnvalidatedChain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveUnvalidatedChain.Location = new System.Drawing.Point(556, 1);
+            this.buttonRemoveUnvalidatedChain.Margin = new System.Windows.Forms.Padding(1);
+            this.buttonRemoveUnvalidatedChain.Name = "buttonRemoveUnvalidatedChain";
+            this.buttonRemoveUnvalidatedChain.Size = new System.Drawing.Size(185, 22);
+            this.buttonRemoveUnvalidatedChain.TabIndex = 3;
+            this.buttonRemoveUnvalidatedChain.Text = "Remove Unvalidated Chain";
+            this.buttonRemoveUnvalidatedChain.UseVisualStyleBackColor = true;
             // 
             // ACW3_Blockchain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(744, 411);
+            this.ClientSize = new System.Drawing.Size(744, 451);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -482,12 +573,15 @@ namespace ACW3_Blockchain
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.groupBoxBlockchain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBlockchain)).EndInit();
             this.groupBoxRequests.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequests)).EndInit();
+            this.groupBoxValidation.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -523,6 +617,12 @@ namespace ACW3_Blockchain
         private System.Windows.Forms.Button buttonCreateRequest;
         private System.Windows.Forms.CheckBox checkBoxAutosave;
         private System.Windows.Forms.Button buttonCheckDate;
+        private System.Windows.Forms.GroupBox groupBoxValidation;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Button buttonRemoveUnvalidatedBlocks;
+        private System.Windows.Forms.Button buttonCheckBalance;
+        private System.Windows.Forms.Label labelValidateStatus;
+        private System.Windows.Forms.Button buttonRemoveUnvalidatedChain;
     }
 }
 

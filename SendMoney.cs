@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ACW3_Blockchain
@@ -38,6 +33,7 @@ namespace ACW3_Blockchain
             //textBoxLoginAddress.Text = loginAddressFrom;
             if (numericUpDownAmount.Value > 0)
             {
+                dataGridViewBlockchain.Sort(dataGridViewBlockchain.Columns["id"], ListSortDirection.Ascending);
                 int blockID = Convert.ToInt32(dataGridViewBlockchain["id", dataGridViewBlockchain.RowCount - 1].Value) + 1;
                 string dateOfTransaction = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 string sign = ACW3_Blockchain.SignData(privateKey, blockID.ToString(), textBoxLoginAddress.Text, comboBoxToAddress.Text, numericUpDownAmount.Value.ToString(), dateOfTransaction, exponent, lastBlock);

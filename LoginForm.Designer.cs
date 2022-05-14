@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 61);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 56);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -122,7 +122,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(382, 34);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(382, 29);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // buttonLogin
@@ -132,7 +132,7 @@
             this.buttonLogin.Location = new System.Drawing.Point(1, 1);
             this.buttonLogin.Margin = new System.Windows.Forms.Padding(1);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(189, 32);
+            this.buttonLogin.Size = new System.Drawing.Size(189, 27);
             this.buttonLogin.TabIndex = 0;
             this.buttonLogin.Text = "Log in";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@
             this.buttonExit.Location = new System.Drawing.Point(192, 1);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(1);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(189, 32);
+            this.buttonExit.Size = new System.Drawing.Size(189, 27);
             this.buttonExit.TabIndex = 1;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(384, 61);
+            this.ClientSize = new System.Drawing.Size(384, 56);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
