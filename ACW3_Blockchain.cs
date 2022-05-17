@@ -560,10 +560,11 @@ namespace ACW3_Blockchain
             if (openPathFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBoxBlockchainPath.Text = openPathFileDialog.FileName;
+                readFile();
             }
         }
 
-        private void ButtonReadBlockchain_Click(object sender, EventArgs e)
+        void readFile()
         {
             dataGridViewBlockchain.Rows.Clear();
             try
@@ -572,10 +573,10 @@ namespace ACW3_Blockchain
                 blockList = new List<Dictionary<string, string>>();
                 requestList = new List<Dictionary<string, string>>();
                 parseBlockchain(textBoxBlockchainPath.Text, ref blockList, ref requestList);
-                foreach (Dictionary<string,string> block in blockList)
+                foreach (Dictionary<string, string> block in blockList)
                 {
-                    dataGridViewBlockchain.Rows.Add(block["id"], block["From"], block["To"], block["Amount"], block["Date"], block["Exponent"],block["PreviousHash"], block["Sign"], block["Nonce"]);
-                    if (!addressessList.Contains(block["From"]) && block["From"]!= loginAddressFrom && block["From"] != "0")
+                    dataGridViewBlockchain.Rows.Add(block["id"], block["From"], block["To"], block["Amount"], block["Date"], block["Exponent"], block["PreviousHash"], block["Sign"], block["Nonce"]);
+                    if (!addressessList.Contains(block["From"]) && block["From"] != loginAddressFrom && block["From"] != "0")
                         addressessList.Add(block["From"]);
                     if (!addressessList.Contains(block["To"]) && block["To"] != loginAddressFrom && block["To"] != "0")
                         addressessList.Add(block["To"]);
@@ -589,6 +590,11 @@ namespace ACW3_Blockchain
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ButtonReadBlockchain_Click(object sender, EventArgs e)
+        {
+            readFile();
         }
 
         //public void FillDataGridViewRequests(List<Dictionary<string,string>> requestListDictionary)
@@ -725,29 +731,46 @@ namespace ACW3_Blockchain
 
         void checkDate()
         {
-            List<string> uniqueDates = new List<string>();
-            Dictionary<string, int> repeatedDates = new Dictionary<string, int>();
-            for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
+            //List<string> uniqueDates = new List<string>();
+            //Dictionary<string, int> repeatedDates = new Dictionary<string, int>();
+            //for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
+            //{
+            //    string date = dataGridViewBlockchain["Date", i].Value.ToString();
+            //    if (uniqueDates.Contains(date))
+            //        repeatedDates.Add(date, 0);
+            //    else
+            //        uniqueDates.Add(date);
+            //}
+            //for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
+            //{
+            //    string date = dataGridViewBlockchain["Date", i].Value.ToString();
+            //    if (repeatedDates.ContainsKey(date))
+            //    {
+            //        if (repeatedDates[date] > 0)
+            //            dataGridViewBlockchain["Date", i].Style.BackColor = Color.Red;
+            //        else
+            //        {
+            //            dataGridViewBlockchain["Date", i].Style.BackColor = Color.White;
+            //            repeatedDates[date]++;
+            //        }
+            //    }
+            //}
+            DateTime lastDate = new DateTime();
+            try
             {
-                string date = dataGridViewBlockchain["Date", i].Value.ToString();
-                if (uniqueDates.Contains(date))
-                    repeatedDates.Add(date, 0);
-                else
-                    uniqueDates.Add(date);
-            }
-            for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
-            {
-                string date = dataGridViewBlockchain["Date", i].Value.ToString();
-                if (repeatedDates.ContainsKey(date))
+                for (int i = 0; i < dataGridViewBlockchain.RowCount; i++)
                 {
-                    if (repeatedDates[date] > 0)
-                        dataGridViewBlockchain["Date", i].Style.BackColor = Color.Red;
-                    else
-                    {
+                    DateTime date = DateTime.Parse(dataGridViewBlockchain["Date", i].Value.ToString());
+                    if (lastDate < date)
                         dataGridViewBlockchain["Date", i].Style.BackColor = Color.White;
-                        repeatedDates[date]++;
-                    }
+                    else
+                        dataGridViewBlockchain["Date", i].Style.BackColor = Color.Red;
+                    lastDate = date;
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
