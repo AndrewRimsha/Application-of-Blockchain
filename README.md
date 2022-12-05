@@ -1,11 +1,12 @@
 # Application-of-Blockchain
-A visual application of blockchain technology with such protection mechanisms as authentication, verification of the user's balance, signature, transaction date, calculation of nonce and hash are demonstrated.
-
+A visual application of blockchain technology with such protection mechanisms as authentication, verification of the user's balance, signature, transaction date, calculation of nonce and hash are demonstrated. The developed application implements the storage of records with money transactions between users.
+<br><br>
 ![Authentication Form](https://github.com/AndrewRimsha/Application-of-Blockchain/blob/main/screenshots/01_Authentication.png "Authentication Form")
 1. TextBox with path to xml-file with private key;
 2. Button “Find Path” to open file dialog with file search;
 3. Button “Log in” for user authentication from xml-file;
 4. Button “Exit” for close the program.
+
 <br><br>
 ![Main Form](https://github.com/AndrewRimsha/Application-of-Blockchain/blob/main/screenshots/02_Main_Form.png "Main Form")
 1. TextBox with path to blockchain-file;
@@ -32,6 +33,7 @@ A visual application of blockchain technology with such protection mechanisms as
 22. Button “Create Request” to create request for user;
 23. Button “Remove Unvalidated Blocks” to remove only blocks with violations;
 24. Button “Remove Unvalidated Chain” to remove all blocks after first block with violation.
+
 <br><br>
 ![Send Money Form](https://github.com/AndrewRimsha/Application-of-Blockchain/blob/main/screenshots/03_Send_Money_Form.png "Send Money Form")
 1. TextBox with sender address (public key);
@@ -39,6 +41,7 @@ A visual application of blockchain technology with such protection mechanisms as
 3. NumericUpDown with amount of the transaction;
 4. Button “Send” to complete the transaction;
 5. Button “Cancel” to close SendMoney form.
+
 <br><br>
 ![Request Form](https://github.com/AndrewRimsha/Application-of-Blockchain/blob/main/screenshots/04_Request_Form.png "Request Form")
 1. TextBox with address of creator (current user);
